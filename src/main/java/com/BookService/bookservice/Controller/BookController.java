@@ -26,7 +26,7 @@ public class BookController {
 	public List<Book> books;
 	
 	@GetMapping
-	@PreAuthorize("hasRole='ADMIN")
+	@PreAuthorize("hasAuthority('SCOPE_internal')")
 	public List<Book> getbooks()
 	{
 		book1 = new Book();
@@ -41,7 +41,7 @@ public class BookController {
 		
 		books = new ArrayList<>();
 		
-		books.add(book1);
+		books.add(book1); 
 		books.add(book2);
 		return books;
 		
@@ -51,7 +51,7 @@ public class BookController {
 	}
 	
 	@GetMapping("/{bookid}")
-	@PreAuthorize("hasRole='ADMIN'||hasRole='USER'")
+	@PreAuthorize("hasAuthority('SCOPE_internal')||hasAuthority('Admin')")
 	public Book getbookbyid(@PathVariable("bookid") int bookid)
 	{
 		List<Ratings>  ratingform = new ArrayList<>();
